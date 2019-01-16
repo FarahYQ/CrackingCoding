@@ -53,6 +53,7 @@ class Tree:
       order.append(node.val)
     return order
 
+# Problem 4.3:
   def depth(self,root):
     if root.val == None: return []
     queue = [root]
@@ -81,3 +82,25 @@ tree = Tree()
 root = tree.minimal_tree([1,2,3,4,7,9])
 print(tree.bst_traversal(root))
 
+# Problem 4.5:
+def is_bst(root, max_val, min_val):
+  if not root: return True
+  if (max_val and root.val > max_val ) or (min_val and root.val <= min_val):
+    return False
+  if (not is_bst(root.left, root.val, min_val )) or (not is_bst(root.right, max_val, root.val)):
+    return False
+  return True
+
+print(is_bst(root, None, None))
+
+# Problem 4.6:
+def find_next(node):
+  if not node: return None
+  if node.right: return node.right
+  elif node.parent.left == node: return node.parent
+  else:
+    q = node.parent
+    while q.parent.left != q:
+      q = q.parent
+    return q.parent
+  return None

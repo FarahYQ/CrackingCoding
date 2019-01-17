@@ -104,3 +104,31 @@ def find_next(node):
       q = q.parent
     return q.parent
   return None
+
+
+  # Make and use a trie as a dictionary
+
+  def make_trie(words):
+  dictionary = collections.defaultdict(dict)
+  for word in words:
+    curr_dict = dictionary
+    for letter in word:
+      if letter not in curr_dict: curr_dict[letter] = {}
+      curr_dict = curr_dict[letter]
+    curr_dict["end"] = "end"
+  return dictionary
+    
+
+words = ["foo", "bar", "barz", "cat"]
+
+word_dict = make_trie(words)
+
+def in_trie(trie, word):
+  curr_dict = trie
+  for letter in word:
+    if letter not in curr_dict: return False
+    curr_dict = curr_dict[letter]
+  if "end" in curr_dict: return True
+  return False
+
+print(in_trie(word_dict, "cat"))

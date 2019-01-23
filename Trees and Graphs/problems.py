@@ -1,4 +1,4 @@
-# Problem 4.1:
+`# Problem 4.1:
 def route(graph, node1, node2):
   # graph = {1: [3,4,5], 2: [3,4]} --> False
   # graph = {1:[3,4,5],2:[4],3:[1,2]} --> True
@@ -81,6 +81,20 @@ class Tree:
 tree = Tree()
 root = tree.minimal_tree([1,2,3,4,7,9])
 print(tree.bst_traversal(root))
+
+
+def find_next(node):
+  if not node: return None
+  if node.right: return node.right
+  elif node.parent.left == node: return node.parent
+  else:
+    q = node.parent
+    while q.parent.left != q:
+      q = q.parent
+    return q.parent
+  return None
+print(root.right.left.val)
+print(find_next(root.right.left).val)
 
 # Problem 4.5:
 def is_bst(root, max_val, min_val):

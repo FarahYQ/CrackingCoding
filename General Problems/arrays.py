@@ -1,3 +1,5 @@
+
+# Find nth smallest number in given unsorted array:
 def nth_smallest(arr,n):
   if len(arr) == 0: return None
   if len(arr) == 1: return arr[0]
@@ -24,3 +26,5 @@ def nth_smallest(arr,n):
     return nth_smallest(arr[:left],n)
   else:
     return nth_smallest(arr[left+1:],n-(left+1))
+
+print(nth_smallest([2,6,5,0,7,8,3],0))

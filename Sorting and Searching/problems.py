@@ -74,3 +74,29 @@ def quicksort(arr):
 
 print("result is:",quicksort([2,6,5,0,7,8,3]))
 
+# Problem 10.10: Rank from Stream
+def getRankOfNumber(nums, target):
+  if len(nums) == 0: return -1
+  if len(nums) == 1 and nums[0] == target: return 0
+  left = 0
+  right = len(nums)-2
+  last = nums[len(nums)-1]
+  while left <= right:
+    print(left, right, nums, nums[left])
+    while nums[left] <= last and left < len(nums)-1: left += 1
+    while nums[right] > last: right -= 1
+
+    if left < right:
+      temp = nums[left]
+      nums[left] = nums[right]
+      nums[right] = temp
+      left += 1
+      right -= 1
+  nums[len(nums)-1] = nums[left]
+  nums[left] = last
+  if nums[left] == target: return left
+  elif nums[left] > target: return getRankOfNumber(nums[:left], target)
+  else: return left + 1 + getRankOfNumber(nums[left+1:],target)
+
+print(getRankOfNumber([5,1,4,4,5,9,7,13,3], 4))
+

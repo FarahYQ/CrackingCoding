@@ -5,6 +5,7 @@ def jump(self, nums):
     :type nums: List[int]
     :rtype: int
     """
+    if len(nums) <= 1: return 0
     self.minJumps = float("inf")
     
     def findPaths(nums, count, pos):
@@ -17,3 +18,13 @@ def jump(self, nums):
     findPaths(nums, 0,0)
     if self.minJumps == float("inf"): return 0
     return self.minJumps
+
+def jump(self, nums):
+    if len(nums) <= 1: return 0
+    l, r = 0, nums[0]
+    times = 1
+    while r < len(nums) - 1:
+        times += 1
+        nxt = max(i + nums[i] for i in range(l, r + 1))
+        l, r = r, nxt
+    return times

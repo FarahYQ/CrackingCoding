@@ -28,3 +28,4 @@ def nth_smallest(arr,n):
     return nth_smallest(arr[left+1:],n-(left+1))
 
 print(nth_smallest([2,6,5,0,7,8,3],0))
+

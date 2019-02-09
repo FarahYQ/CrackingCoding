@@ -29,3 +29,23 @@ def nth_smallest(arr,n):
 
 print(nth_smallest([2,6,5,0,7,8,3],0))
 
+# Given a collection of numbers that might contain duplicates, return all permutations
+# [1,1,2] --> [[1,1,2], [1,2,1], [2,1,1]]
+def permuteUnique(self, nums):
+  """
+  :type nums: List[int]
+  :rtype: List[List[int]]
+  """
+  if len(nums) <= 1: return [nums]
+  
+  prev = self.permuteUnique(nums[:len(nums)-1])
+  
+  last = nums[len(nums)-1]
+  permutations = set()
+  for perm in prev:
+    perm = list(perm)
+    for i in range(len(perm)+1):
+      new_perm = perm[i:] + [last] + perm[:i]
+      permutations.add(tuple(new_perm))
+  return list(permutations)
+

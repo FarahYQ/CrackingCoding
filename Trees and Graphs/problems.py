@@ -146,3 +146,37 @@ def in_trie(trie, word):
   return False
 
 print(in_trie(word_dict, "cat"))
+
+
+import collections
+class Graph:
+  def __init__(self, vertices):
+    self.graph = collections.defaultdict(list)
+    self.num_vertices = vertices # num of vertices with vertices 0 to vertices-1
+
+  def addEdge(self, u, v):
+    self.graph[u].append(v)
+
+  def topologicalSortUtil(self, v, visited,stack):
+    visited[v] = True
+    for connection in self.graph[v]:
+      if visited[connection] == False:
+        self.topologicalSortUtil(connection,visited, stack)
+    stack.insert(0,v)
+
+  def topologicalSort(self):
+    visited = [False]*self.num_vertices
+    stack = []
+
+    for i in range(self.num_vertices):
+      if visited == False:
+        self.topologicalSortUtil(i, visited, stack)
+    return stack
+
+g = Graph(6)
+g.addEdge(5,2)
+g.addEdge(5,0)
+g.addEdge(4,0)
+g.addEdge(4,1)
+g.addEdge(2,3)
+g.addEdge(3,1)

@@ -49,3 +49,29 @@ def permuteUnique(self, nums):
       permutations.add(tuple(new_perm))
   return list(permutations)
 
+
+# Kadane's algorithm
+def maxSub(arr):
+  lastArr = [arr[0]]
+  last = arr[0]
+  largest = arr[0]
+  largestArr = [arr[0]]
+  tracker = {}
+  tracker[last] = lastArr
+  for i in range(1,len(arr)):
+    if last + arr[i] > arr[i]:
+      lastArr = lastArr + [arr[i]]
+      last += arr[i]
+      tracker[last] = lastArr
+    else:
+      lastArr = [arr[i]]
+      last = arr[i]
+      tracker[last] = lastArr
+  print(tracker)
+  for currSum in tracker:
+    if currSum > largest:
+      largest = currSum
+      largestArr = tracker[currSum]
+  return largest
+
+print(maxSub([-1,3,2,1,2,-1,-4,-7,-1,-4,4]))

@@ -180,3 +180,44 @@ g.addEdge(4,0)
 g.addEdge(4,1)
 g.addEdge(2,3)
 g.addEdge(3,1)
+
+
+# Leetcode problem 103
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+from collections import deque
+class Solution(object):
+  def zigzagLevelOrder(self, root):
+    """
+    :type root: TreeNode
+    :rtype: List[List[int]]
+    """
+    if not root: return []
+    
+    res = []
+    
+    r2l = False
+    
+    queue = deque([root])
+    
+    while queue:
+      size = len(queue)
+      currLevel = []
+      for i in range(size):
+        if r2l:
+          curr = queue.pop()
+          currLevel.append(curr.val)
+          if curr.right: queue.appendleft(curr.right)
+          if curr.left: queue.appendleft(curr.left) 
+        else:
+          curr = queue.popleft()
+          currLevel.append(curr.val)
+          if curr.left: queue.append(curr.left)
+          if curr.right: queue.append(curr.right)
+      res.append(currLevel)
+      r2l = not r2l
+    return res
